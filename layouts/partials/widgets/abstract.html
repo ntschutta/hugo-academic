@@ -21,9 +21,9 @@
 
     {{ range first $page.Params.count (sort (where $.Site.RegularPages "Type" "abstract") ".Params.time_start" ) }}
       {{ if eq $page.Params.list_format 1 }}
-        {{ partial "talk_li_detailed" . }}
+        {{ partial "abstract_li_detailed" . }}
       {{ else }}
-        {{ partial "talk_li_simple" . }}
+        {{ partial "abstract_li_simple" . }}
       {{ end }}
     {{ end }}
   </div>

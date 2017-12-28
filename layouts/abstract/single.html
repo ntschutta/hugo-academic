@@ -25,6 +25,40 @@
       <br>
     {{ end }}
 
+    {{ if (.Params.publication_types) and (ne (index .Params.publication_types 0) "0") }}
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 pub-row-heading">{{ i18n "publication_type" }}</div>
+          <div class="col-xs-12 col-sm-9">
+            {{ range $index, $pubtype := .Params.publication_types }}
+            <a href="{{ "/abstract/" | relLangURL }}#{{ . | urlize }}">
+              {{ index $.Site.Params.publication_types (int .) }}
+            </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+    <div class="visible-xs space-below"></div>
+    {{ end }}
+
+    {{ with .Params.duration }}
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 pub-row-heading">{{ i18n "duration" }}</div>
+          <div class="col-xs-12 col-sm-9">{{ . | markdownify }}</div>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+    <div class="visible-xs space-below"></div>
+    {{ end }}
+
     <div class="visible-xs space-below"></div>
 
     {{ with .Params.location }}

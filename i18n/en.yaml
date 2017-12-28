@@ -89,6 +89,9 @@
 - id: publication_type
   translation: Type
 
+- id: duration
+  translation: Duration
+
 - id: date
   translation: Date
 

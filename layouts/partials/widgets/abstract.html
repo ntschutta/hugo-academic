@@ -19,6 +19,12 @@
   <div class="col-xs-12 col-md-8">
     {{ with $page.Content }}<p>{{ . | markdownify }}</p>{{ end }}
 
+    {{ if and ($page.Params.publication_type) (ne $page.Params.publication_type "-1") }}
+      {{ $.Scratch.Set "recent_pubs" (where (where $.Site.RegularPages "Type" "abstract") ".Params.publication_types" "intersect" (slice $page.Params.publication_type)) }}
+    {{ else }}
+      {{ $.Scratch.Set "recent_pubs" (where $.Site.RegularPages "Type" "abstract") }}
+    {{ end }}
+
     {{ range first $page.Params.count (sort (where $.Site.RegularPages "Type" "abstract") ".Params.time_start" ) }}
       {{ if eq $page.Params.list_format 1 }}
         {{ partial "abstract_li_detailed" . }}
